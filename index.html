@@ -15,22 +15,27 @@
             --glass-border: rgba(255, 255, 255, 0.6);
         }
 
+        /* Nền fixed riêng để tránh bug background-attachment trên iOS */
+        .bg-fixed {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(rgba(253, 251, 247, 0.4), rgba(255, 209, 220, 0.4)), url('1371563.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
         body {
             margin: 0;
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             -webkit-tap-highlight-color: transparent;
             -webkit-touch-callout: none;
-
-            /* Tích hợp ảnh nền của bạn + Lớp phủ mờ màu hồng pastel */
-            background: linear-gradient(rgba(253, 251, 247, 0.4), rgba(255, 209, 220, 0.4)), url('1371563.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
 
             font-family: 'Playfair Display', serif;
             overflow: hidden;
@@ -47,9 +52,7 @@
             align-items: center;
             justify-content: center;
             padding: 0 20px;
-            background: linear-gradient(rgba(253, 251, 247, 0.55), rgba(255, 209, 220, 0.55)), url('1371563.png');
-            background-size: cover;
-            background-position: center;
+            background: linear-gradient(rgba(253, 251, 247, 0.55), rgba(255, 209, 220, 0.55));
             transition: opacity 0.8s ease;
         }
 
@@ -233,23 +236,27 @@
             backdrop-filter: blur(10px);
             border: 1px solid var(--glass-border);
             border-radius: 20px;
-            padding: 20px 40px;
+            padding: 20px clamp(16px, 5vw, 40px);
             text-align: center;
             color: var(--text-color);
             box-shadow: 0 10px 30px rgba(218, 112, 214, 0.2);
             margin-top: 30px;
             z-index: 10;
+            max-width: 90vw;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            user-select: none;
         }
 
         .title {
             font-family: 'Dancing Script', cursive;
-            font-size: 2.0rem;
+            font-size: clamp(1.4rem, 6vw, 2rem);
             margin: 0;
             text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
         }
 
         .hint {
-            font-size: 1.1rem;
+            font-size: clamp(0.9rem, 4vw, 1.1rem);
             margin-top: 10px;
             font-style: italic;
             opacity: 0.9;
@@ -270,17 +277,22 @@
             top: -140px;
             left: 50%;
             transform: translateX(-50%);
-            width: 600px;
-            max-width: none;
+            width: min(600px, 120vw);
             pointer-events: none;
             z-index: 1;
             filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            user-select: none;
         }
 
         .cake-img {
-            width: 250px;
+            width: clamp(220px, 75vw, 300px);
             content: url('cake-hero-01.png');
             filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.15));
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+            user-select: none;
         }
 
         .candle-wrapper {
@@ -1110,10 +1122,11 @@
         .letter-body {
             font-family: 'Dancing Script', cursive;
             font-weight: 650;
-            font-size: 1.05rem;
+            font-size: clamp(0.8rem, 3.5vw, 1.05rem);
             line-height: 1.5;
             color: #4a3527;
-            white-space: pre-line;
+            white-space: normal;
+            word-break: keep-all;
             margin: 0;
         }
 
@@ -1129,6 +1142,8 @@
 </head>
 
 <body>
+
+    <div class="bg-fixed"></div>
 
     <!-- ================== PHASE 0: Cuộn tới ngày sinh nhật ================== -->
     <div id="phase0">
@@ -1251,14 +1266,7 @@
             </div>
 
             <div class="letter-scroll">
-                <p class="letter-body" id="letterBody">Hùng không biết nói gì, nên viết đơn giản thôi: Chúc mừng sinh
-                    nhật Quỳnh Chi nhé =))))
-
-                    Năm qua chắc không ít giông bão, nhưng Chi đã đi đến được ngày hôm nay mới thấy Chi mạnh mẽ và giỏi
-                    hơn bản thân nghĩ nhiều đấy.
-
-                    Tuổi mới chúc cho Quỳnh Chi luôn ăn ngon ngủ kỹ, nụ cười rạng rỡ, vui vẻ mỗi ngày, và xinh đẹp hơn
-                    cả những điều tốt đẹp nhất=))))</p>
+                <p class="letter-body" id="letterBody">Hùng không biết nói gì, nên viết đơn giản thôi: Chúc mừng sinh nhật Quỳnh Chi nhé =))))<br><br>Năm qua chắc không ít những chuyện không vui, nhưng Chi đã đi đến được ngày hôm nay mới thấy Chi mạnh mẽ và giỏi hơn bản thân nghĩ nhiều đấy.<br><br>Tuổi mới chúc cho Quỳnh Chi luôn ăn ngon ngủ kỹ, nụ cười rạng rỡ, vui vẻ mỗi ngày, và xinh đẹp hơn cả những điều tốt đẹp nhất nhaaa=))))</p>
                 <p class="letter-signature">— Ngô Đức Hùng</p>
             </div>
         </div>
@@ -1785,16 +1793,16 @@
             const letterBody = document.getElementById('letterBody');
             if (!letterBody) return;
 
-            const fullText = letterBody.textContent.trim();
-            letterBody.textContent = '';
+            const fullHTML = letterBody.innerHTML;
+            letterBody.innerHTML = '';
             let typeIndex = 0;
             let typeInterval = null;
 
             function startTypewriter() {
                 if (typeInterval || typeIndex > 0) return;
                 typeInterval = setInterval(() => {
-                    if (typeIndex < fullText.length) {
-                        letterBody.textContent += fullText.charAt(typeIndex);
+                    if (typeIndex < fullHTML.length) {
+                        letterBody.innerHTML = fullHTML.substring(0, typeIndex + 1);
                         typeIndex++;
                     } else {
                         clearInterval(typeInterval);
