@@ -1,0 +1,1807 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Chúc mừng sinh nhật Quỳnh Chi!!!</title>
+    <style>
+        /* Nhúng Font chữ Fz Aghita (Playfair) và Dancing Script */
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Dancing+Script:wght@600&family=Playfair+Display:ital,wght@0,500;1,500&display=swap');
+
+        :root {
+            --text-color: #d1497b;
+            --glass-bg: rgba(255, 255, 255, 0.35);
+            --glass-border: rgba(255, 255, 255, 0.6);
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+
+            /* Tích hợp ảnh nền của bạn + Lớp phủ mờ màu hồng pastel */
+            background: linear-gradient(rgba(253, 251, 247, 0.4), rgba(255, 209, 220, 0.4)), url('img/1371563.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            font-family: 'Playfair Display', serif;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* ---------------- CSS PHASE 0 (Cuộn ngày sinh nhật) ---------------- */
+        #phase0 {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            background: linear-gradient(rgba(253, 251, 247, 0.55), rgba(255, 209, 220, 0.55)), url('img/1371563.png');
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.8s ease;
+        }
+
+        #phase0.dr-hide {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .dr-twinkle {
+            position: absolute;
+            color: #ff9fc4;
+            opacity: 0;
+            animation: dr-twinkle-anim 2.4s ease-in-out infinite;
+        }
+
+        @keyframes dr-twinkle-anim {
+
+            0%,
+            100% {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+
+            50% {
+                opacity: 0.9;
+                transform: scale(1.15);
+            }
+        }
+
+        .dr-title {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+            color: var(--text-color);
+            text-align: center;
+            font-size: clamp(42px, 13vw, 78px);
+            text-shadow: 0 0 26px rgba(255, 150, 180, 0.35);
+            margin: 0 0 10px 0;
+            opacity: 0;
+            animation: dr-fade-down 0.9s ease forwards;
+        }
+
+        @keyframes dr-fade-down {
+            from {
+                opacity: 0;
+                transform: translateY(-14px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .dr-reel-window {
+            position: relative;
+            height: 304px;
+            width: min(360px, 92vw);
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 74%, transparent 100%);
+            mask-image: linear-gradient(to bottom, transparent 0%, #000 26%, #000 74%, transparent 100%);
+        }
+
+        .dr-reel {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            will-change: transform;
+        }
+
+        .dr-reel.dr-run {
+            animation-name: dr-scroll;
+            animation-duration: 2.6s;
+            animation-timing-function: cubic-bezier(0.15, 0.85, 0.25, 1);
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes dr-scroll {
+            from {
+                transform: translateY(var(--reel-from));
+            }
+
+            to {
+                transform: translateY(var(--reel-to));
+            }
+        }
+
+        .dr-num {
+            height: 76px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            font-size: clamp(38px, 11vw, 60px);
+            color: rgba(209, 73, 123, 0.55);
+        }
+
+        .dr-num-target {
+            opacity: 0;
+            /* ô số thật bị ẩn đi để lớp "final" đè lên với hiệu ứng lung linh */
+        }
+
+        .dr-final {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%) scale(0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            opacity: 0;
+        }
+
+        .dr-final::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 230px;
+            height: 230px;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: -1;
+            background: radial-gradient(circle, rgba(255, 182, 210, 0.55) 0%, rgba(255, 150, 190, 0.18) 42%, rgba(255, 150, 190, 0) 70%);
+        }
+
+        .dr-final.dr-pop {
+            animation: dr-pop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes dr-pop {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .dr-arrow {
+            font-size: clamp(24px, 6vw, 40px);
+            color: #ff69b4;
+            position: relative;
+            top: 16px;
+        }
+
+        .dr-day {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: clamp(64px, 20vw, 118px);
+            line-height: 1;
+            color: #d1497b;
+            text-shadow: 0 0 30px rgba(255, 150, 190, 0.6);
+        }
+
+        .dr-month {
+            align-self: flex-end;
+            padding-bottom: 8px;
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(18px, 5.5vw, 30px);
+            color: var(--text-color);
+            white-space: nowrap;
+        }
+
+        /* ---------------- CSS PHASE 2 ---------------- */
+        #phase2 {
+            display: none;
+            /* chỉ hiện sau khi Phase 0 chạy xong */
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .message-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 20px 40px;
+            text-align: center;
+            color: var(--text-color);
+            box-shadow: 0 10px 30px rgba(218, 112, 214, 0.2);
+            margin-top: 30px;
+            z-index: 10;
+        }
+
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.0rem;
+            margin: 0;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .hint {
+            font-size: 1.1rem;
+            margin-top: 10px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .cake-container {
+            position: relative;
+            margin-top: 130px;
+            /* chừa chỗ cho garland phía trên */
+            cursor: pointer;
+            touch-action: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* ---------------- GARLAND BUNTING ---------------- */
+        .garland-bunting {
+            position: absolute;
+            top: -140px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            max-width: none;
+            pointer-events: none;
+            z-index: 1;
+            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.12));
+        }
+
+        .cake-img {
+            width: 300px;
+            content: url('img/cake-hero-01.png');
+            filter: drop-shadow(0 20px 20px rgba(0, 0, 0, 0.15));
+        }
+
+        .candle-wrapper {
+            position: absolute;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 26;
+        }
+
+        .progress-ring {
+            position: absolute;
+            top: -20px;
+            transform: rotate(-90deg);
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+
+        .progress-ring circle.bg {
+            stroke: rgba(255, 200, 100, 0.25);
+        }
+
+        .progress-ring circle.fill {
+            stroke: #ff7800;
+            stroke-dasharray: 200;
+            stroke-dashoffset: 200;
+            transition: stroke-dashoffset 0.1s linear;
+        }
+
+        .dark-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 28;
+            background: #000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .candle-stick {
+            width: 8px;
+            height: 60px;
+            background: repeating-linear-gradient(-45deg, #fff, #fff 4px, #D5B670 4px, #D5B670 8px);
+            border-radius: 3px;
+            box-shadow: inset -2px 0 5px rgba(0, 0, 0, 0.1), 0 0 8px rgba(255, 200, 100, 0.3);
+        }
+
+        .flame {
+            width: 24px;
+            height: 48px;
+            background: radial-gradient(60% 55% at 50% 68%, #fff 0%, #ffeb3b 30%, #ff9800 60%, #ff5722 85%, rgba(255, 87, 34, 0.3) 100%);
+            border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+            box-shadow: 0 0 35px 12px rgba(255, 200, 50, 0.8), 0 0 70px 22px rgba(255, 150, 50, 0.5), 0 0 100px 35px rgba(255, 100, 30, 0.2);
+            margin-bottom: 2px;
+            animation: flicker 1s infinite alternate;
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        @keyframes flicker {
+            0% {
+                transform: scale(1) rotate(-1deg);
+            }
+
+            50% {
+                transform: scale(1.1) rotate(1deg);
+            }
+
+            100% {
+                transform: scale(0.9) rotate(-2deg);
+            }
+        }
+
+        .flame.extinguished {
+            opacity: 0 !important;
+            transform: scale(0) !important;
+            transition: opacity 0.05s, transform 0.05s !important;
+        }
+
+        .flame.wobbling {
+            animation: wobble 0.15s infinite alternate !important;
+        }
+
+        @keyframes wobble {
+            0% {
+                transform: scale(1) rotate(-5deg) translateX(-3px);
+            }
+
+            25% {
+                transform: scale(0.98) rotate(4deg) translateX(2px);
+            }
+
+            50% {
+                transform: scale(0.96) rotate(-3deg) translateX(-2px);
+            }
+
+            75% {
+                transform: scale(0.93) rotate(5deg) translateX(3px);
+            }
+
+            100% {
+                transform: scale(0.9) rotate(-2deg) translateX(0);
+            }
+        }
+
+        .candle-wrapper.leaning .flame {
+            animation: flame-sway 0.3s ease-in-out infinite alternate !important;
+        }
+
+        @keyframes flame-sway {
+            0% {
+                transform: scale(1) rotate(-8deg) translateX(-2px);
+            }
+
+            100% {
+                transform: scale(1) rotate(8deg) translateX(2px);
+            }
+        }
+
+        .wish-text-black {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: 'Cormorant Garamond', serif;
+            font-style: italic;
+            font-weight: 500;
+            font-size: clamp(24px, 6vw, 42px);
+            color: #f5e6e8;
+            text-shadow: 0 0 20px rgba(255, 182, 210, 0.5), 0 0 50px rgba(209, 73, 123, 0.3), 0 2px 8px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            z-index: 30;
+            pointer-events: none;
+            text-align: center;
+            letter-spacing: 0.04em;
+            white-space: nowrap;
+        }
+
+        .next-btn {
+            display: none;
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #ff99cc, #ff69b4);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ---------------- CSS PHASE 3 ---------------- */
+        #phase3 {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            width: 100%;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .wish-title {
+            font-size: 26px;
+            color: #d1497b;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+            max-width: 90%;
+        }
+
+        .wish-input-wrapper {
+            position: relative;
+            width: 180px;
+            margin-bottom: 25px;
+            filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
+            transition: transform 0.3s;
+        }
+
+        .wish-input-wrapper:focus-within {
+            transform: scale(1.05);
+        }
+
+        .wish-tag-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .wish-input-tag {
+            position: absolute;
+            top: 45%;
+            left: 10%;
+            width: 80%;
+            height: 50%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            color: #4a2a1c;
+            text-align: center;
+            resize: none;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wish-input-tag::placeholder {
+            color: #8c5a45;
+            opacity: 0.6;
+        }
+
+        /* ---------------- CSS PHASE 4 (Gửi điều ước lên trời) ---------------- */
+        #phase4 {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            text-align: center;
+            background: radial-gradient(ellipse at top, #3d1828 0%, #1f0a16 60%, #0d0508 100%);
+            overflow: hidden;
+            color: #fdece0;
+            opacity: 0;
+            transition: opacity 0.7s ease;
+        }
+
+        #phase4.p4-show {
+            opacity: 1;
+        }
+
+        .star-field {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .star-dot {
+            position: absolute;
+            border-radius: 50%;
+            background: #ffe9bd;
+            animation: p4-twinkle-anim var(--dur, 2.4s) ease-in-out infinite;
+            animation-delay: var(--delay, 0s);
+        }
+
+        @keyframes p4-twinkle-anim {
+
+            0%,
+            100% {
+                opacity: 0.15;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .phase4-content,
+        .phase4-sent {
+            position: relative;
+            z-index: 2;
+            max-width: 380px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0;
+            animation: p4-fade-up 0.7s ease forwards;
+        }
+
+        @keyframes p4-fade-up {
+            from {
+                opacity: 0;
+                transform: translateY(16px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .p4-kicker {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #e3b06b;
+            margin: 0 0 10px 0;
+        }
+
+        .p4-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            line-height: 1.35;
+            color: #fdece0;
+            margin: 0 0 22px 0;
+        }
+
+        .p4-star-btn {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .p4-star-glow {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .p4-star-glow-bg {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 224, 150, 0.5) 0%, rgba(255, 200, 110, 0.18) 45%, rgba(255, 200, 110, 0) 70%);
+            animation: p4-twinkle-anim 2.4s ease-in-out infinite;
+        }
+
+        .p4-star-icon {
+            position: relative;
+            font-size: 3rem;
+            color: #ffe6a6;
+            text-shadow: 0 0 18px rgba(255, 214, 130, 0.9);
+            animation: p4-star-pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes p4-star-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.12);
+            }
+        }
+
+        .p4-wish-pill {
+            border: 1px solid rgba(201, 162, 75, 0.5);
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 999px;
+            padding: 8px 20px;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.15rem;
+            color: #ffe6a6;
+            max-width: 260px;
+            overflow-wrap: break-word;
+        }
+
+        .p4-subtitle {
+            margin: 18px 0 0 0;
+            font-size: 0.9rem;
+            color: rgba(253, 236, 224, 0.7);
+        }
+
+        .p4-actions {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .p4-back-btn {
+            border: none;
+            border-radius: 999px;
+            padding: 12px 26px;
+            background: #b06a2a;
+            color: #fdece0;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: filter 0.2s;
+        }
+
+        .p4-back-btn:hover {
+            filter: brightness(1.08);
+        }
+
+        .p4-repeat-btn {
+            background: none;
+            border: none;
+            color: rgba(253, 236, 224, 0.7);
+            font-size: 0.85rem;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .p4-repeat-btn:hover {
+            color: #fdece0;
+        }
+
+        .p4-sent-message {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: rgba(253, 236, 224, 0.85);
+            margin: 0 0 14px 0;
+        }
+
+        .p4-tap-hint {
+            font-size: 0.85rem;
+            color: rgba(255, 214, 130, 0.8);
+            margin: 0;
+        }
+
+        /* Sao băng bay ngang màn hình khi gửi điều ước */
+        .shooting-star {
+            position: fixed;
+            z-index: 70;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background: #fff8e0;
+            box-shadow: 0 0 6px 2px rgba(255, 232, 180, 0.9);
+            pointer-events: none;
+        }
+
+        .shooting-star::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            width: 120px;
+            height: 2px;
+            transform: translateY(-50%);
+            background: linear-gradient(to left, rgba(255, 232, 180, 0.9), transparent);
+        }
+
+        @keyframes p4-shoot {
+            from {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(var(--dx), var(--dy));
+                opacity: 0;
+            }
+        }
+
+        /* Ngôi sao mang điều ước + các sao đồng hành bay chéo lên trời */
+        .fly-star-wrap {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 70;
+            width: 0;
+            height: 0;
+            pointer-events: none;
+            animation: p4-fly-move linear forwards;
+        }
+
+        @keyframes p4-fly-move {
+            from {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+
+            85% {
+                opacity: 1;
+            }
+
+            to {
+                transform: translate(var(--dx), var(--dy));
+                opacity: 0.9;
+            }
+        }
+
+        .fly-star-visual {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #fff8e0;
+            box-shadow: 0 0 8px 3px rgba(255, 232, 180, 0.9);
+        }
+
+        .fly-star-visual::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            width: 90px;
+            height: 2px;
+            transform: translateY(-50%);
+            transform-origin: right center;
+            background: linear-gradient(to left, rgba(255, 232, 180, 0.9), transparent);
+        }
+
+        .fly-star-main {
+            width: 7px;
+            height: 7px;
+            box-shadow: 0 0 16px 6px rgba(255, 214, 130, 1);
+        }
+
+        .fly-star-main::after {
+            width: 150px;
+            background: linear-gradient(to left, rgba(255, 220, 150, 1), transparent);
+        }
+
+        /* Bloom nổ lấp lánh khi sao tới đích */
+        .bloom-glow {
+            position: fixed;
+            z-index: 69;
+            width: 40px;
+            height: 40px;
+            margin-left: -20px;
+            margin-top: -20px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 236, 190, 0.95) 0%, rgba(255, 214, 130, 0.5) 40%, rgba(255, 214, 130, 0) 72%);
+            pointer-events: none;
+            animation: p4-glow-pop 0.6s ease-out forwards;
+        }
+
+        .bloom-glow-big {
+            width: 100px;
+            height: 100px;
+            margin-left: -50px;
+            margin-top: -50px;
+            background: radial-gradient(circle, rgba(255, 246, 214, 1) 0%, rgba(255, 214, 130, 0.6) 45%, rgba(255, 214, 130, 0) 75%);
+            animation: p4-glow-pop 0.8s ease-out forwards;
+        }
+
+        @keyframes p4-glow-pop {
+            0% {
+                transform: scale(0.2);
+                opacity: 0;
+            }
+
+            35% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1.7);
+                opacity: 0;
+            }
+        }
+
+        .bloom-particle {
+            position: fixed;
+            z-index: 69;
+            border-radius: 50%;
+            background: #ffe9bd;
+            box-shadow: 0 0 5px 1px rgba(255, 224, 150, 0.9);
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @keyframes p4-bloom {
+            0% {
+                transform: translate(0, 0) scale(0.3);
+                opacity: 0;
+            }
+
+            25% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translate(var(--bx), var(--by)) scale(0.4);
+                opacity: 0;
+            }
+        }
+
+        /* ---------------- CSS PHASE 5 (Kỷ niệm hình trái tim) ---------------- */
+        #phase5 {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            width: 100%;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .heart-grid-wrapper {
+            position: relative;
+            width: min(340px, 84vw);
+            margin: 0 auto;
+        }
+
+        .heart-glow {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 130%;
+            height: 130%;
+            border-radius: 50%;
+            z-index: -1;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 182, 210, 0.5) 0%, rgba(255, 150, 190, 0.18) 45%, rgba(255, 150, 190, 0) 72%);
+        }
+
+        .heart-grid {
+            display: grid;
+            grid-template-columns: repeat(11, 1fr);
+            gap: clamp(1px, 0.5vw, 3px);
+        }
+
+        .heart-tile {
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35), 0 1px 4px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            transform: scale(0.4);
+            animation: heart-tile-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .heart-bottom-photo {
+            width: clamp(20px, 5vw, 30px);
+            aspect-ratio: 1 / 1;
+            border-radius: 8px;
+            margin: 3px auto 0;
+            background-size: cover;
+            background-position: center;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35), 0 1px 4px rgba(0, 0, 0, 0.12);
+            opacity: 0;
+            transform: scale(0.4);
+            animation: heart-tile-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation-delay: 0.8s;
+        }
+
+        @keyframes heart-tile-pop {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .heart-caption {
+            margin: 22px 0 0 0;
+            font-size: 0.95rem;
+            color: var(--text-color);
+            opacity: 0.85;
+        }
+
+        .heart-title {
+            margin: 8px 0 0 0;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(34px, 9vw, 46px);
+            color: var(--text-color);
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+        }
+
+        .heart-subtitle {
+            margin: 4px 0 0 0;
+            font-size: 1rem;
+            color: var(--text-color);
+            opacity: 0.85;
+        }
+
+        .phase5-btn {
+            display: inline-block;
+            margin-top: 26px;
+            padding: 10px 30px;
+            background: linear-gradient(135deg, #ff99cc, #ff69b4);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-size: 1.1rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+
+        .phase5-btn:hover {
+            filter: brightness(1.05);
+        }
+
+        /* ---------------- Cánh hoa rơi (dùng ở Phase 5) ---------------- */
+        .petal-field {
+            position: fixed;
+            inset: 0;
+            z-index: 5;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .falling-petal {
+            position: absolute;
+            top: -12%;
+            opacity: 0;
+            will-change: transform, opacity;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+            animation-name: petal-fall;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+        @keyframes petal-fall {
+            0% {
+                transform: translate3d(0, 0, 0) rotate(var(--start-rotate, 0deg));
+                opacity: 0;
+            }
+
+            8% {
+                opacity: 0.9;
+            }
+
+            50% {
+                transform: translate3d(var(--drift, 20px), 60vh, 0) rotate(calc(var(--start-rotate, 0deg) + 180deg));
+            }
+
+            92% {
+                opacity: 0.9;
+            }
+
+            100% {
+                transform: translate3d(calc(var(--drift, 20px) * -1), 125vh, 0) rotate(calc(var(--start-rotate, 0deg) + 360deg));
+                opacity: 0;
+            }
+        }
+
+        /* ---------------- CSS PHASE 6 (Lá thư nhỏ) ---------------- */
+        #phase6 {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 2rem 1rem;
+            width: 100%;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .letter-kicker {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 0.85rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--text-color);
+            margin: 0 0 18px 0;
+        }
+
+        .letter-paper {
+            position: relative;
+            width: min(380px, 90vw);
+            aspect-ratio: 3 / 4;
+            margin-top: 90px;
+            background-image: url('img/paper-letter-tall-01.webp');
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            filter: drop-shadow(0 16px 24px rgba(0, 0, 0, 0.18));
+        }
+
+        /* Ảnh nhỏ đính kèm phía trên thư — không có ảnh thì cứ xoá cả khối .letter-photo-tag */
+        .letter-photo-tag {
+            position: absolute;
+            top: -72px;
+            right: 6%;
+            width: 68px;
+            transform: rotate(6deg);
+            background: #fbf7ee;
+            padding: 6px 6px 16px 6px;
+            border-radius: 3px;
+            box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+        }
+
+        .letter-photo-tag img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            object-fit: cover;
+            border-radius: 1px;
+        }
+
+        .letter-scroll {
+            position: absolute;
+            inset: 0;
+            overflow-y: auto;
+            padding: 15% 12%;
+            text-align: left;
+        }
+
+        .letter-body {
+            font-family: 'Dancing Script', cursive;
+            font-weight: 650;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            color: #4a3527;
+            white-space: pre-line;
+            margin: 0;
+        }
+
+        .letter-signature {
+            margin-top: 12px;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: #4a3527;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================== PHASE 0: Cuộn tới ngày sinh nhật ================== -->
+    <div id="phase0">
+        <span class="dr-twinkle" style="left:16%; top:22%; font-size:14px; animation-delay:0s">✦</span>
+        <span class="dr-twinkle" style="left:82%; top:18%; font-size:10px; animation-delay:0.6s">✦</span>
+        <span class="dr-twinkle" style="left:78%; top:70%; font-size:13px; animation-delay:1.1s">✦</span>
+        <span class="dr-twinkle" style="left:14%; top:72%; font-size:9px; animation-delay:0.3s">✦</span>
+
+        <h1 class="dr-title">Happy Birthday</h1>
+
+        <div class="dr-reel-window">
+            <div class="dr-reel" id="dateReel"></div>
+            <div class="dr-final" id="dateFinal">
+                <span class="dr-arrow">→</span>
+                <span class="dr-day" id="finalDay"></span>
+                <span class="dr-month" id="finalMonth"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================== PHASE 2 ================== -->
+    <div class="dark-overlay" id="darkOverlay"></div>
+    <div class="wish-text-black" id="wishTextBlack">Ước một điều ước nào...</div>
+
+    <div id="phase2">
+        <div class="cake-container" id="cakeContainer">
+            <img src="img/garland-bunting-01.webp" alt="Garland Bunting" class="garland-bunting">
+
+            <div class="candle-wrapper">
+                <svg class="progress-ring" width="80" height="80">
+                    <circle class="bg" cx="40" cy="40" r="32" fill="none" stroke-width="4"></circle>
+                    <circle class="fill" id="progressCircle" cx="40" cy="40" r="32" fill="none" stroke-width="4"
+                        stroke-linecap="round"></circle>
+                </svg>
+                <div class="flame" id="flame"></div>
+                <div class="candle-stick"></div>
+            </div>
+            <div class="cake-img"></div>
+        </div>
+
+        <div class="message-box">
+            <p class="title">Có một món quà nhỏ dành cho Quỳnh Chi nè...</p>
+            <p class="hint" id="hintText">Nhưng trước tiên, hãy thổi nến đã nhé!</p>
+            <p class="hint" id="candleHint" style="font-size: 0.95rem; opacity: 0.7;">Chạm & giữ ngọn nến để thổi tắt
+                lửa 🕯️</p>
+        </div>
+    </div>
+
+    <!-- ================== PHASE 3 ================== -->
+    <div id="phase3">
+        <!-- <p style="color: #ff69b4; font-style: italic; margin-bottom: 0; text-shadow: 0 1px 2px #fff;">Một điều ước</p> -->
+        <h2 class="wish-title">Bây giờ Chi hãy viết ra một điều mong ước nhé!</h2>
+
+        <div class="wish-input-wrapper">
+            <img src="img/wish-tag-01.webp" alt="Wish Tag" class="wish-tag-img">
+            <textarea id="userWish" class="wish-input-tag" placeholder="Điều ước của Chi là...?"></textarea>
+        </div>
+
+        <button type="button" id="saveWishBtn" class="next-btn" style="display: block; margin-top: 0;">Ghi nhận điều ước
+            ✨</button>
+    </div>
+
+    <!-- ================== PHASE 4: Gửi điều ước lên trời ================== -->
+    <div id="phase4">
+        <div class="star-field" id="starField"></div>
+
+        <!-- Trạng thái chờ: bấm vào sao để gửi điều ước -->
+        <div class="phase4-content" id="phase4Content">
+            <!-- <p class="p4-kicker">Gửi lên trời</p> -->
+            <h2 class="p4-title">Biến điều ước thành sao băng !!?</h2>
+
+            <button type="button" class="p4-star-btn" id="wishStarBtn">
+                <span class="p4-star-glow">
+                    <span class="p4-star-glow-bg"></span>
+                    <span class="p4-star-icon">✦</span>
+                </span>
+                <span class="p4-wish-pill" id="wishPillText">Điều ước của Chi</span>
+            </button>
+
+            <p class="p4-subtitle">Chạm vào ngôi sao để gửi điều ước của Chi lên trời đêm.</p>
+        </div>
+
+        <!-- Trạng thái đã gửi -->
+        <div class="phase4-sent" id="phase4Sent" style="display: none;">
+            <!-- <p class="p4-kicker">Gửi lên trời</p> -->
+            <h2 class="p4-title">Điều ước đã được gửi đi !!!</h2>
+            <p class="p4-sent-message">Người ta nói điều ước theo sao băng sớm muộn cũng thành hiện thực. Từ đêm nay,
+                sẽ luôn có một ngôi sao giữ lời ước ấy giúp Chi. Mong rằng điều ước của Chi lúc này thật sự tìm được
+                đường đến với Chi trong thời gian tới.</p>
+            <p class="p4-tap-hint">Chạm vào bầu trời để thả thêm sao băng nhé ✧</p>
+
+            <div class="p4-actions">
+                <button type="button" class="p4-back-btn" id="p4NextBtn">Coi tiếp nè</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================== PHASE 5: Kỷ niệm hình trái tim ================== -->
+    <div id="phase5">
+        <div class="petal-field" id="petalField" aria-hidden="true"></div>
+
+        <div class="heart-grid-wrapper">
+            <div class="heart-glow" aria-hidden="true"></div>
+            <div class="heart-grid" id="heartGrid"></div>
+        </div>
+        <p class="heart-caption">Vài kỉ niệm nhỏ của Quỳnh Chi.</p>
+        <h2 class="heart-title">Chúc Mừng Sinh Nhật<br>Quỳnh Chi</h2>
+        <p class="heart-subtitle">Hôm nay Chi nhất định phải thật là vui vẻ nha.</p>
+        <button type="button" class="phase5-btn" id="toLetterBtn">Có một lá thư dành cho Chi nè</button>
+    </div>
+
+    <!-- ================== PHASE 6: Lá thư nhỏ ================== -->
+    <div id="phase6">
+        <!-- <p class="letter-kicker">Lá thư nhỏ</p> -->
+
+        <div class="letter-paper" id="letterPaper">
+            <!-- Ảnh nhỏ đính kèm (tuỳ chọn) — nếu không có ảnh, xoá cả khối div này -->
+            <div class="letter-photo-tag">
+                <img src="img/qc5.jpg" alt="" aria-hidden="true">
+            </div>
+
+            <div class="letter-scroll">
+                <p class="letter-body" id="letterBody">Hùng không biết nói gì, nên viết đơn giản thôi: Chúc mừng sinh nhật Quỳnh Chi nhé =))))
+
+                    Năm qua chắc không ít giông bão, nhưng Chi đã đi đến được ngày hôm nay mới thấy Chi mạnh mẽ và giỏi hơn bản thân nghĩ nhiều đấy.
+
+                    Tuổi mới chúc cho Quỳnh Chi luôn ăn ngon ngủ kỹ, nụ cười rạng rỡ, vui vẻ mỗi ngày, và xinh đẹp hơn cả những điều tốt đẹp nhất=))))</p>
+                <p class="letter-signature">— Ngô Đức Hùng</p>
+            </div>
+        </div>
+
+        <!-- <button type="button" class="phase5-btn" id="letterNextBtn">Vẫn còn nữa →</button> -->
+    </div>
+
+    <script>
+        /* =========================================================
+           CHỈNH NGÀY SINH NHẬT Ở ĐÂY
+           ========================================================= */
+        const BIRTHDAY_DAY = 20;   // <-- đổi thành ngày sinh nhật (1-31)
+        const BIRTHDAY_MONTH = 8;  // <-- đổi thành tháng sinh nhật (1-12)
+
+        // ------------- LOGIC PHASE 0: Cuộn tới ngày sinh nhật -------------
+        (function initDateReveal() {
+            const phase0 = document.getElementById('phase0');
+            const reel = document.getElementById('dateReel');
+            const dateFinal = document.getElementById('dateFinal');
+            const finalDay = document.getElementById('finalDay');
+            const finalMonth = document.getElementById('finalMonth');
+
+            const ITEM_HEIGHT = 76;
+            const WINDOW_HEIGHT = 304;
+            const ITEMS_BEFORE = 18; // số ô cuộn qua trước khi tới ngày sinh nhật
+            const ITEMS_AFTER = 4;   // số ô cuộn thêm sau ngày sinh nhật (cho mượt)
+
+            // Sinh danh sách số cuộn qua (chỉ mang tính thị giác, không cần đúng lịch)
+            const sequence = [];
+            for (let i = ITEMS_BEFORE; i >= 1; i--) {
+                let n = BIRTHDAY_DAY - i;
+                while (n < 1) n += 31;
+                sequence.push(n);
+            }
+            const targetIndex = sequence.length; // vị trí của ngày sinh nhật thật
+            sequence.push(BIRTHDAY_DAY);
+            for (let i = 1; i <= ITEMS_AFTER; i++) {
+                let n = BIRTHDAY_DAY + i;
+                while (n > 31) n -= 31;
+                sequence.push(n);
+            }
+
+            // Render các ô số
+            sequence.forEach((num, idx) => {
+                const el = document.createElement('div');
+                el.className = 'dr-num' + (idx === targetIndex ? ' dr-num-target' : '');
+                el.textContent = num;
+                reel.appendChild(el);
+            });
+
+            // Tính vị trí translateY bắt đầu / kết thúc để ô target nằm giữa cửa sổ
+            const centerOffset = WINDOW_HEIGHT / 2 - ITEM_HEIGHT / 2;
+            const from = centerOffset; // bắt đầu: ô đầu tiên nằm giữa
+            const to = centerOffset - targetIndex * ITEM_HEIGHT; // kết thúc: ô target nằm giữa
+
+            reel.style.setProperty('--reel-from', from + 'px');
+            reel.style.setProperty('--reel-to', to + 'px');
+
+            const monthNames = ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6',
+                'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'];
+            finalDay.textContent = BIRTHDAY_DAY;
+            finalMonth.textContent = monthNames[BIRTHDAY_MONTH - 1] || ('Tháng ' + BIRTHDAY_MONTH);
+
+            // Bắt đầu chạy sau khi tiêu đề "Happy Birthday" fade xong
+            setTimeout(() => {
+                reel.classList.add('dr-run');
+            }, 500);
+
+            reel.addEventListener('animationend', () => {
+                // Ô số cuộn dừng lại, hiện lớp "final" (mũi tên + ngày + tháng) đè lên
+                setTimeout(() => {
+                    dateFinal.classList.add('dr-pop');
+                }, 250);
+
+                // Sau khi khoe ngày sinh nhật một lúc, chuyển sang Phase bánh
+                setTimeout(() => {
+                    phase0.classList.add('dr-hide');
+                    setTimeout(() => {
+                        phase0.style.display = 'none';
+                        document.getElementById('phase2').style.display = 'flex';
+                    }, 800); // khớp với thời gian transition opacity của #phase0
+                }, 2200);
+            });
+        })();
+
+        // Các biến của Phase 2
+        const phase2 = document.getElementById('phase2');
+        const cakeContainer = document.getElementById('cakeContainer');
+        const flame = document.getElementById('flame');
+        const progressCircle = document.getElementById('progressCircle');
+        const hintText = document.getElementById('hintText');
+        const candleHint = document.getElementById('candleHint');
+        const darkOverlay = document.getElementById('darkOverlay');
+        const wishTextBlack = document.getElementById('wishTextBlack');
+
+        // Các biến của Phase 3
+        const phase3 = document.getElementById('phase3');
+        const userWishInput = document.getElementById('userWish');
+        const saveWishBtn = document.getElementById('saveWishBtn');
+
+        let isBlowing = false;
+        let blowProgress = 200;
+        let blowInterval;
+
+        // ------------- LOGIC PHASE 2 -------------
+        function startBlowing(e) {
+            e.preventDefault();
+            if (blowProgress <= 0) return;
+
+            isBlowing = true;
+            candleHint.innerText = "Giữ thêm chút nữa...";
+
+            // Lửa đung đưa trái phải khi ấn
+            const candleWrapper = document.querySelector('.candle-wrapper');
+            candleWrapper.classList.add('leaning');
+
+            blowInterval = setInterval(() => {
+                blowProgress -= 3;
+                progressCircle.style.strokeDashoffset = Math.max(0, blowProgress);
+
+                // Màn hình tối dần theo tiến độ thổi nến
+                const darkAmount = (200 - blowProgress) / 200 * 0.85;
+                darkOverlay.style.opacity = darkAmount;
+
+                // Khi lửa sắp tắt, bắt đầu rung lắc yếu đi
+                if (blowProgress <= 40 && !flame.classList.contains('wobbling')) {
+                    flame.classList.add('wobbling');
+                }
+
+                if (blowProgress <= 0) {
+                    extinguishCandle();
+                }
+            }, 30);
+        }
+
+        function stopBlowing() {
+            if (!isBlowing || blowProgress <= 0) return;
+            isBlowing = false;
+            clearInterval(blowInterval);
+
+            candleHint.innerText = "Giữ lâu hơn một chút nha";
+
+            // Dừng lửa đung đưa
+            const candleWrapper = document.querySelector('.candle-wrapper');
+            candleWrapper.classList.remove('leaning');
+
+            let recoverInterval = setInterval(() => {
+                if (isBlowing) {
+                    clearInterval(recoverInterval);
+                    return;
+                }
+                blowProgress += 5;
+                if (blowProgress >= 200) {
+                    blowProgress = 200;
+                    clearInterval(recoverInterval);
+                }
+                progressCircle.style.strokeDashoffset = blowProgress;
+
+                // Màn hình sáng trở lại
+                const darkAmount = (200 - blowProgress) / 200 * 0.85;
+                darkOverlay.style.opacity = darkAmount;
+
+                // Bỏ rung lắc nếu progress phục hồi
+                if (blowProgress > 40) {
+                    flame.classList.remove('wobbling');
+                }
+            }, 30);
+        }
+
+        function extinguishCandle() {
+            clearInterval(blowInterval);
+
+            // Lửa tắt phụp ngay lập tức
+            flame.classList.remove('wobbling');
+            flame.classList.add('extinguished');
+            progressCircle.style.opacity = '0';
+
+            // Màn hình tối đen hoàn toàn - không còn gì nhìn thấy
+            darkOverlay.style.opacity = '1';
+
+            // Ẩn hint
+            hintText.style.display = 'none';
+            candleHint.style.display = 'none';
+
+            // Đợi màn hình đen hoàn toàn, không còn gì sót lại, rồi mới hiện chữ
+            setTimeout(() => {
+                wishTextBlack.style.opacity = '1';
+            }, 1200);
+
+            // Tự động chuyển sang Phase 3
+            setTimeout(() => {
+                wishTextBlack.style.opacity = '0';
+                setTimeout(() => {
+                    phase2.style.display = 'none';
+                    phase3.style.display = 'flex';
+                    // Fade out dark overlay để lộ phase 3
+                    darkOverlay.style.opacity = '0';
+                }, 1200);
+            }, 3500);
+        }
+
+        cakeContainer.addEventListener('pointerdown', startBlowing);
+        window.addEventListener('pointerup', stopBlowing);
+        window.addEventListener('pointercancel', stopBlowing);
+
+        // ------------- LOGIC PHASE 3 -------------
+        saveWishBtn.addEventListener('click', () => {
+            const wishText = userWishInput.value.trim();
+
+            if (wishText === "") {
+                const wrapper = document.querySelector('.wish-input-wrapper');
+                wrapper.style.transform = "translateX(-10px)";
+                setTimeout(() => wrapper.style.transform = "translateX(10px)", 100);
+                setTimeout(() => wrapper.style.transform = "translateX(0)", 200);
+                return;
+            }
+
+            localStorage.setItem('birthdayWish', wishText);
+            if (window.__goToStarlight) {
+                window.__goToStarlight(wishText);
+            }
+        });
+
+        // ------------- LOGIC PHASE 4: Gửi điều ước lên trời -------------
+        (function initStarlight() {
+            const phase4 = document.getElementById('phase4');
+            const starField = document.getElementById('starField');
+            const wishStarBtn = document.getElementById('wishStarBtn');
+            const wishPillText = document.getElementById('wishPillText');
+            const phase4Content = document.getElementById('phase4Content');
+            const phase4Sent = document.getElementById('phase4Sent');
+
+            // Sinh các đốm sao lấp lánh nền trời đêm
+            function buildStarField(count) {
+                starField.innerHTML = '';
+                for (let i = 0; i < count; i++) {
+                    const s = document.createElement('span');
+                    s.className = 'star-dot';
+                    const size = 2 + Math.random() * 2;
+                    s.style.left = Math.random() * 100 + '%';
+                    s.style.top = Math.random() * 100 + '%';
+                    s.style.width = size + 'px';
+                    s.style.height = size + 'px';
+                    s.style.setProperty('--delay', (Math.random() * 2.4).toFixed(2) + 's');
+                    s.style.setProperty('--dur', (2 + Math.random() * 1.4).toFixed(2) + 's');
+                    starField.appendChild(s);
+                }
+            }
+            buildStarField(36);
+
+            // Bắn một sao băng bay chéo qua màn hình (dùng khi chạm thêm vào bầu trời), xuất phát từ tọa độ (x0, y0)
+            function launchShootingStar(x0, y0) {
+                const star = document.createElement('div');
+                star.className = 'shooting-star';
+                star.style.left = x0 + 'px';
+                star.style.top = y0 + 'px';
+                const angle = Math.random() * Math.PI * 0.3 + Math.PI * 0.15; // hướng chéo xuống
+                const dist = 260 + Math.random() * 220;
+                const dx = Math.cos(angle) * dist;
+                const dy = Math.sin(angle) * dist;
+                star.style.setProperty('--dx', dx + 'px');
+                star.style.setProperty('--dy', dy + 'px');
+                star.style.transform = `rotate(${angle}rad)`;
+                star.style.animation = 'p4-shoot 1.1s ease-in forwards';
+                document.body.appendChild(star);
+                star.addEventListener('animationend', () => star.remove());
+            }
+
+            // Một ngôi sao bay chéo LÊN trời theo góc angleDeg (đơn vị độ, 0° = phải, -90° = thẳng lên)
+            // Khi bay xong sẽ tự nổ bloom lấp lánh tại điểm đến
+            function launchFlyingStar(x0, y0, angleDeg, isMain) {
+                const rad = angleDeg * Math.PI / 180;
+                const dist = isMain
+                    ? Math.min(window.innerHeight, window.innerWidth) * 0.62 + Math.random() * 60
+                    : 110 + Math.random() * 170;
+                const duration = isMain ? 1.3 : 0.8 + Math.random() * 0.5;
+                const dx = Math.cos(rad) * dist;
+                const dy = Math.sin(rad) * dist;
+
+                const wrap = document.createElement('div');
+                wrap.className = 'fly-star-wrap';
+                wrap.style.left = x0 + 'px';
+                wrap.style.top = y0 + 'px';
+                wrap.style.setProperty('--dx', dx + 'px');
+                wrap.style.setProperty('--dy', dy + 'px');
+                wrap.style.animationDuration = duration + 's';
+                wrap.style.animationTimingFunction = 'cubic-bezier(0.16, 0.6, 0.2, 1)';
+
+                const visual = document.createElement('div');
+                visual.className = 'fly-star-visual' + (isMain ? ' fly-star-main' : '');
+                // xoay đuôi sao theo đúng hướng bay (đuôi luôn kéo dài ngược hướng di chuyển)
+                visual.style.transform = `rotate(${angleDeg}deg)`;
+
+                wrap.appendChild(visual);
+                document.body.appendChild(wrap);
+
+                wrap.addEventListener('animationend', () => {
+                    const endX = x0 + dx;
+                    const endY = y0 + dy;
+                    wrap.remove();
+                    burstBloom(endX, endY, isMain ? 32 : 12, isMain);
+                });
+            }
+
+            // Nổ bloom lấp lánh: 1 luồng sáng trung tâm + nhiều hạt sao nhỏ toả ra xung quanh
+            function burstBloom(x, y, count, big) {
+                const glow = document.createElement('span');
+                glow.className = 'bloom-glow' + (big ? ' bloom-glow-big' : '');
+                glow.style.left = x + 'px';
+                glow.style.top = y + 'px';
+                document.body.appendChild(glow);
+                glow.addEventListener('animationend', () => glow.remove());
+
+                for (let i = 0; i < count; i++) {
+                    const p = document.createElement('span');
+                    p.className = 'bloom-particle';
+                    const angle = Math.random() * Math.PI * 2;
+                    const dist = (big ? 55 : 25) + Math.random() * (big ? 110 : 55);
+                    const bx = Math.cos(angle) * dist;
+                    const by = Math.sin(angle) * dist;
+                    const size = 2 + Math.random() * (big ? 4 : 2.5);
+                    p.style.left = x + 'px';
+                    p.style.top = y + 'px';
+                    p.style.width = size + 'px';
+                    p.style.height = size + 'px';
+                    p.style.setProperty('--bx', bx + 'px');
+                    p.style.setProperty('--by', by + 'px');
+                    const delay = Math.random() * 0.12;
+                    const dur = 0.7 + Math.random() * 0.5;
+                    p.style.animation = `p4-bloom ${dur}s ease-out ${delay}s forwards`;
+                    document.body.appendChild(p);
+                    p.addEventListener('animationend', () => p.remove());
+                }
+            }
+
+            // Gửi điều ước lên trời: 1 ngôi sao chính bay chéo lên cao + nhiều sao phụ toả cùng lúc,
+            // tất cả cùng nổ bloom lấp lánh khi tới đích
+            function sendWishToSky(x0, y0) {
+                // Ngôi sao chính mang điều ước, bay chéo lên trời (khoảng -70° đến -110°, tức gần như thẳng đứng, hơi lệch)
+                const mainAngle = -90 + (Math.random() * 40 - 20);
+                launchFlyingStar(x0, y0, mainAngle, true);
+
+                // Đàn sao phụ bay lên cùng lúc theo nhiều hướng toả rộng, tạo cảm giác "rất nhiều sao"
+                const extraCount = 9;
+                for (let i = 0; i < extraCount; i++) {
+                    const delay = Math.random() * 260;
+                    const angle = -35 - Math.random() * 110; // toả rộng từ ngang-trên tới gần thẳng đứng
+                    const originX = x0 + (Math.random() * 70 - 35);
+                    const originY = y0 + (Math.random() * 24 - 12);
+                    setTimeout(() => {
+                        launchFlyingStar(originX, originY, angle, false);
+                    }, delay);
+                }
+            }
+
+            // Chuyển từ Phase 3 sang Phase 4, hiển thị điều ước vừa nhập
+            function goToStarlight(wishText) {
+                const saved = wishText || localStorage.getItem('birthdayWish');
+                wishPillText.textContent = saved ? `"${saved}"` : 'Điều ước của cậu';
+
+                phase4Content.style.display = 'flex';
+                phase4Sent.style.display = 'none';
+                // reset animation fade-up để chạy lại mỗi lần vào phase
+                phase4Content.style.animation = 'none';
+                void phase4Content.offsetWidth;
+                phase4Content.style.animation = '';
+
+                document.getElementById('phase3').style.display = 'none';
+                phase4.style.display = 'flex';
+                requestAnimationFrame(() => phase4.classList.add('p4-show'));
+            }
+            window.__goToStarlight = goToStarlight;
+
+            // Bấm vào sao: gửi điều ước lên trời (bay chéo lên + đàn sao phụ + nổ bloom)
+            wishStarBtn.addEventListener('click', () => {
+                const rect = wishStarBtn.getBoundingClientRect();
+                const originX = rect.left + rect.width / 2;
+                const originY = rect.top + rect.height / 2;
+                sendWishToSky(originX, originY);
+
+                setTimeout(() => {
+                    phase4Content.style.display = 'none';
+                    phase4Sent.style.display = 'flex';
+                    phase4Sent.style.animation = 'none';
+                    void phase4Sent.offsetWidth;
+                    phase4Sent.style.animation = '';
+                }, 1550);
+            });
+
+            // Sau khi đã gửi, chạm vào bầu trời để thả thêm sao băng trang trí
+            phase4.addEventListener('click', (e) => {
+                if (phase4Sent.style.display !== 'flex') return;
+                if (e.target.closest('button')) return;
+                launchShootingStar(e.clientX, e.clientY);
+            });
+
+            // Nút "Xem tiếp →": rời khỏi bầu trời đêm, sang Phase 5 (kỷ niệm hình trái tim)
+            document.getElementById('p4NextBtn').addEventListener('click', () => {
+                phase4.classList.remove('p4-show');
+                setTimeout(() => {
+                    phase4.style.display = 'none';
+                    document.getElementById('phase5').style.display = 'flex';
+                }, 700);
+            });
+        })();
+
+        // ------------- LOGIC PHASE 5: Lưới ảnh hình trái tim -------------
+        (function initHeartGrid() {
+            const heartGrid = document.getElementById('heartGrid');
+            const toLetterBtn = document.getElementById('toLetterBtn');
+
+            // 1 = ô có ảnh, 0 = ô trống — ghép lại tạo thành hình trái tim (11 cột x 9 hàng)
+            const heartPattern = [
+                [0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0],
+                [1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+                [0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+                [0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0],
+                [0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0],
+            ];
+
+            /* Đưa ảnh của cậu vào thư mục img/ rồi đổi tên/số lượng ở đây.
+               Danh sách sẽ được lặp lại tuần hoàn cho tới khi lấp đầy hình trái tim. */
+            const photos = [
+                'img/qc1.jpg',
+                'img/qc2.jpg',
+                'img/qc3.jpg',
+                'img/qc4.jpg',
+                'img/qc5.jpg',
+                'img/qc6.jpg',
+            ];
+
+            let photoIndex = 0;
+            let tileOrder = 0;
+
+            heartPattern.forEach(row => {
+                row.forEach(cell => {
+                    if (cell === 1) {
+                        const tile = document.createElement('div');
+                        tile.className = 'heart-tile';
+                        tile.style.backgroundImage = `url('${photos[photoIndex % photos.length]}')`;
+                        tile.style.animationDelay = (tileOrder * 0.018) + 's';
+                        heartGrid.appendChild(tile);
+                        photoIndex++;
+                        tileOrder++;
+                    } else {
+                        const empty = document.createElement('span');
+                        heartGrid.appendChild(empty);
+                    }
+                });
+            });
+
+            // Thêm một bức ảnh nhỏ ở dưới cùng để hoàn thiện hình trái tim
+            const heartGridWrapper = document.querySelector('.heart-grid-wrapper');
+            const bottomPhoto = document.createElement('div');
+            bottomPhoto.className = 'heart-bottom-photo';
+            bottomPhoto.style.backgroundImage = `url('${photos[photoIndex % photos.length]}')`;
+            heartGridWrapper.appendChild(bottomPhoto);
+
+            // Nút "Có một lá thư dành cho cậu →": chuyển sang Phase 6 (lá thư)
+            toLetterBtn.addEventListener('click', () => {
+                document.getElementById('phase5').style.display = 'none';
+                const phase6 = document.getElementById('phase6');
+                phase6.style.display = 'flex';
+                // reset animation fadeIn để chạy lại mỗi lần vào phase
+                phase6.style.animation = 'none';
+                void phase6.offsetWidth;
+                phase6.style.animation = '';
+                // Bắt đầu hiệu ứng đánh máy cho lá thư
+                if (window.__startTypewriter) {
+                    setTimeout(() => window.__startTypewriter(), 600);
+                }
+            });
+        })();
+
+        // ------------- LOGIC: Cánh hoa rơi (chạy trong Phase 5) -------------
+        (function initPetals() {
+            const petalField = document.getElementById('petalField');
+            if (!petalField) return;
+
+            // 7 ảnh cánh hoa của cậu — đặt trong thư mục img/
+            const petalImages = [
+                'img/petal-cream-broad-01.webp',
+                'img/petal-cream-long-01.webp',
+                'img/petal-blush-broad-01.webp',
+                'img/petal-peach-broad-01.webp',
+                'img/petal-peach-long-01.webp',
+                'img/petal-peach-long-02.webp',
+                'img/petal-cream-heart-01.webp',
+            ];
+
+            const PETAL_COUNT = 18; // muốn hoa rơi dày/thưa hơn thì đổi số này
+
+            for (let i = 0; i < PETAL_COUNT; i++) {
+                const petal = document.createElement('img');
+                petal.src = petalImages[Math.floor(Math.random() * petalImages.length)];
+                petal.alt = '';
+                petal.setAttribute('aria-hidden', 'true');
+                petal.className = 'falling-petal';
+
+                const size = 16 + Math.random() * 24;       // 16px - 40px
+                const left = Math.random() * 100;           // vị trí ngang (%)
+                const duration = 8 + Math.random() * 6;     // 8s - 14s mỗi vòng rơi
+                const delay = -(Math.random() * duration);  // rải rác thời điểm bắt đầu
+                const drift = Math.round(Math.random() * 100 - 50) + 'px'; // độ lệch ngang khi rơi
+                const startRotate = Math.floor(Math.random() * 360) + 'deg';
+
+                petal.style.left = left + '%';
+                petal.style.width = size + 'px';
+                petal.style.animationDuration = duration + 's';
+                petal.style.animationDelay = delay + 's';
+                petal.style.setProperty('--drift', drift);
+                petal.style.setProperty('--start-rotate', startRotate);
+
+                petalField.appendChild(petal);
+            }
+        })();
+
+        // ------------- LOGIC PHASE 6: Lá thư nhỏ -------------
+        (function initLetter() {
+            const letterBody = document.getElementById('letterBody');
+            if (!letterBody) return;
+
+            const fullText = letterBody.textContent.trim();
+            letterBody.textContent = '';
+            let typeIndex = 0;
+            let typeInterval = null;
+
+            function startTypewriter() {
+                if (typeInterval || typeIndex > 0) return;
+                typeInterval = setInterval(() => {
+                    if (typeIndex < fullText.length) {
+                        letterBody.textContent += fullText.charAt(typeIndex);
+                        typeIndex++;
+                    } else {
+                        clearInterval(typeInterval);
+                        typeInterval = null;
+                    }
+                }, 45);
+            }
+            window.__startTypewriter = startTypewriter;
+        })();
+    </script>
+</body>
+
+</html>
